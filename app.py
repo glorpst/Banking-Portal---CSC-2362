@@ -436,7 +436,22 @@ def transfer():
     if request.method == 'POST':
         from_account = request.form['from_account']
         to_account = request.form['to_account']
-        amount = float(request.form['amount'])
+
+        try:
+            amount = float(request.form['amount'])
+        except ValueError:
+            return show_message_page(
+                "Invalid amount format. Please enter a valid number.", 
+                "/transfer", 
+                "Go Back"
+            )
+        if amount <= 0:
+            return show_message_page(
+                "Transfer amount must be greater than zero.", 
+                "/transfer", 
+                "Go Back"
+            )
+
         description = request.form.get('description', 'Transfer')
         
         if not is_admin:
@@ -549,7 +564,22 @@ def admin_transfer():
     if request.method == 'POST':
         from_account = request.form['from_account']
         to_account = request.form['to_account']
-        amount = float(request.form['amount'])
+
+        try:
+            amount = float(request.form['amount'])
+        except ValueError:
+            return show_message_page(
+                "Invalid amount format. Please enter a valid number.", 
+                "/admin_transfer", 
+                "Go Back"
+            )
+        if amount <= 0:
+            return show_message_page(
+                "Transfer amount must be greater than zero.",
+                "/admin_transfer",
+                "Go Back"
+            )
+
         description = request.form.get('description', 'Admin Transfer')
         
         source_account = next((acc for acc in all_accounts if acc['account_number'] == from_account), None)
