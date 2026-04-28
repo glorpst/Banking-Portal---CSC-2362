@@ -1,1 +1,9 @@
+# db files
+accounts.txt
+transactions.txt
+users.txt
+
+# security / secrets
 secret.key
+.env
+
