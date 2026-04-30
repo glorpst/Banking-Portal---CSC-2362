@@ -239,86 +239,10 @@ def update_account_balance(account_number, new_balance):
 
 def show_message_page(message, redirect_url, redirect_text):
     """Display styled message page with purple button"""
-    return f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>LSU Banking</title>
-        <style>
-            * {{
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }}
-            
-            body {{
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                background: linear-gradient(135deg, #461d7c 0%, #fdd023 100%);
-                min-height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 20px;
-            }}
-            
-            .message-container {{
-                max-width: 500px;
-                width: 100%;
-                background: white;
-                border-radius: 20px;
-                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-                padding: 2rem;
-                text-align: center;
-            }}
-            
-            .message-icon {{
-                font-size: 4rem;
-                margin-bottom: 1rem;
-            }}
-            
-            .message-title {{
-                font-size: 1.5rem;
-                color: #461d7c;
-                margin-bottom: 1rem;
-            }}
-            
-            .message-text {{
-                color: #666;
-                margin-bottom: 2rem;
-                font-size: 1.1rem;
-            }}
-            
-            .btn {{
-                display: inline-block;
-                padding: 1rem 2rem;
-                border-radius: 10px;
-                text-decoration: none;
-                font-weight: 600;
-                font-size: 1.1rem;
-                transition: all 0.3s;
-                border: none;
-                cursor: pointer;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                background: linear-gradient(135deg, #461d7c 0%, #5a2d9e 100%);
-                color: white;
-            }}
-            
-            .btn:hover {{
-                transform: translateY(-2px);
-                box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-            }}
-        </style>
-    </head>
-    <body>
-        <div class="message-container">
-            <div class="message-icon">ℹ️</div>
-            <div class="message-title">Notice</div>
-            <div class="message-text">{message}</div>
-            <a href="{redirect_url}" class="btn">{redirect_text}</a>
-        </div>
-    </body>
-    </html>
-    """
+    return render_template('message.html',
+                           message=message,
+                           redirect_url=redirect_url,
+                           redirect_text=redirect_text)
 
 # Initialize database on startup
 initialize_database()
